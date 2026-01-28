@@ -13,13 +13,21 @@ struct ContentView: View {
      AssignmentItem(course: "History", description: "Civil War Paper", dueDate: Date()),
      AssignmentItem(course: "Science", description: "Atomic Bomb Lab", dueDate: Date())]
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            List {
+                ForEach(assignmentItems) { item in
+                
+                }
+                .onMove(perform: { indices, newOffset in
+                    assignmentItems.move(fromOffsets: indices, toOffset: newOffset)
+                })
+                .onDelete(perform: { indexSet in
+                    assignmentItems.remove(atOffsets: indexSet)
+                })
+                .navigationBarTitle("Assignment Notebook", displayMode: .inline)
+                .navigationBarItems(leading: EditButton())
+            }
         }
-        .padding()
     }
 }
 
