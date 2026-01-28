@@ -17,10 +17,15 @@ struct AddAssignmentView: View {
     @Environment(\.dismiss) var dismiss
     static let courses = ["Math", "Science", "History", "Art", "Music"]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                Picker("Course", selection: $course) {
+                    ForEach(Self.courses, id: \.self) { course in
+                        Text(course)
+                        
+                    }
+                }
+            }
+        }
     }
-}
-
-#Preview {
-    AddAssignmentView()
 }
